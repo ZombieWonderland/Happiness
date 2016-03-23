@@ -11,7 +11,7 @@ import UIKit
 class HappinessViewController: UIViewController, FaceViewDataSource
 {
     // Model
-    var happiness: Int = 80 { // 0 = very sad, 100 = ecstatic
+    var happiness: Int = 50 { // 0 = very sad, 100 = ecstatic
         didSet {
             // Keep it from 0 to 100, inclusive
             happiness = min(max(happiness, 0), 100)

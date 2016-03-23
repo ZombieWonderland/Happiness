@@ -37,13 +37,6 @@ class FaceView: UIView
         }
     }
     
-    
-    // How can dataSource be a protocol/type when it doesn't implement the protocol?
-    // I don't really know what it means to have a protocol as a type.
-    // I understand types as things inherited from classes, enums and structs
-    // but above, why doesn't datasource have a method called smilinessForFaceView?
-    
-    
     private struct Scaling {
         static let FaceRadiusToEyeRadiusRatio: CGFloat = 20
         static let FaceRadiusToEyeOffsetRatio: CGFloat = 3
@@ -57,7 +50,6 @@ class FaceView: UIView
         static let FaceRadiusToMouthWidthRatio: CGFloat = 0.7
         static let FaceRadiusToMouthHeightRatio: CGFloat = 3
         static let FaceRadiusToMouthOffsetRatio: CGFloat = 3
-        
     }
     
     private enum Eye { case Left, Right }
@@ -98,7 +90,6 @@ class FaceView: UIView
         }
         
         // now the center of both eyebrows are set
-        // still need start, end, and control points for them
         let start = CGPoint(x: eyebrowCenter.x - eyebrowWidth/2, y: eyebrowCenter.y)
         let end = CGPoint(x: start.x + eyebrowWidth, y: start.y)
         let cp1 = CGPoint(x: start.x + eyebrowHeight/3, y: start.y - browArchHeight)
@@ -110,9 +101,6 @@ class FaceView: UIView
         path.lineWidth = lineWidth
         
         return path
-        
-        
-        
     }
     
     // fractionOfMaxSmile:
@@ -151,16 +139,12 @@ class FaceView: UIView
         bezierPathForEye(.Left).stroke()
         bezierPathForEye(.Right).stroke()
         
-        
-        
         let smiliness = dataSource?.smilinessForFaceView(self) ?? 0.0
         let smilePath = bezierPathForSmile(smiliness)
         smilePath.stroke()
         
         bezierPathForEyebrow(.Left, fractionOfMaxSmile: smiliness).stroke()
         bezierPathForEyebrow(.Right, fractionOfMaxSmile: smiliness).stroke()
-        
-        
     }
 
 
